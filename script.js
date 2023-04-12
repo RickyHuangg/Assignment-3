@@ -4,7 +4,18 @@ const getTMDBData = async (url) => {
   return (await axios.get(url)).data;
 };
 
-const createMovieTile = (id, poster, title, date, description, revenue) => {
+const createMovieTile = (
+  id,
+  poster,
+  title,
+  date,
+  description,
+  revenue,
+  popular,
+  runtime,
+  tagline,
+  voterating
+) => {
   const tile = document.createElement("div");
   const details = document.createElement("div");
   const img = document.createElement("img");
@@ -12,6 +23,10 @@ const createMovieTile = (id, poster, title, date, description, revenue) => {
   const h3 = document.createElement("h3");
   const h4 = document.createElement("h4");
   const rev = document.createElement("h5");
+  const pop = document.createElement("h5");
+  const run = document.createElement("h5");
+  const tag = document.createElement("h5");
+  const vote = document.createElement("h5");
   const trailerButton = document.createElement("button");
 
   tile.classList.add("tile");
@@ -19,7 +34,11 @@ const createMovieTile = (id, poster, title, date, description, revenue) => {
   h1.innerText = title;
   h3.innerText = date;
   h4.innerText = description;
-  rev.innerHTML = `Revenue: ${revenue}`;
+  rev.innerHTML = `Revenue: $ ${revenue}`;
+  pop.innerHTML = `Popularity: ${popular}`;
+  run.innerHTML = `Runtime: ${runtime} mins`;
+  tag.innerHTML = `Tagline: ${tagline}`;
+  vote.innerHTML = `Rating: ${voterating}`;
   trailerButton.innerText = "Trailer";
 
   trailerButton.addEventListener("click", async () => {
@@ -40,6 +59,10 @@ const createMovieTile = (id, poster, title, date, description, revenue) => {
   details.append(h3);
   details.append(h4);
   details.append(rev);
+  details.append(pop);
+  details.append(run);
+  details.append(tag);
+  details.append(vote);
 
   tile.append(img);
   tile.append(details);
@@ -67,14 +90,17 @@ async function getData(id) {
     movie.title,
     movie.release_date,
     movie.overview,
-    movie.revenue
+    movie.revenue,
+    movie.popularity,
+    movie.runtime,
+    movie.tagline,
+    movie.vote_average
   );
   movies.appendChild(tile);
 }
 
 document.getElementById("get1").addEventListener("click", (e) => {
   clearDiv("movies");
-  console.log(document.getElementById("options").value);
   let movieId = document.getElementById("options").value;
   getData(movieId);
 });
