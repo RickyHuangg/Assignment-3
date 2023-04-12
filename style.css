@@ -1,0 +1,49 @@
+* {
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: rgb(231, 221, 221);
+}
+
+.topBar {
+  position: relative;
+  text-align: center;
+}
+
+header {
+  padding: 1rem;
+}
+
+header h1 {
+  text-align: center;
+}
+
+#movies {
+  display: grid;
+  padding: 1rem;
+  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.tile {
+  display: flex;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  gap: 2rem;
+  border-style: solid;
+  border-radius: 1rem;
+  border-color: crimson;
+}
+
+img {
+  width: 200px;
+}
+
+button {
+  border-radius: 0.5rem;
+  background-color: rgb(232, 217, 217);
+  color: rgb(0, 0, 0);
+  padding: 0.5rem;
+  align-self: end;
+}
