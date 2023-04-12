@@ -1,19 +1,17 @@
 import { TMDB_API_KEY } from "./key.js";
 
-const cartContents = new Set();
-
 const getTMDBData = async (url) => {
   return (await axios.get(url)).data;
 };
 
-const createMovieTile = (id, poster, title, date, description) => {
+const createMovieTile = (id, poster, title, date, description, revenue) => {
   const tile = document.createElement("div");
   const details = document.createElement("div");
   const img = document.createElement("img");
   const h1 = document.createElement("h1");
   const h3 = document.createElement("h3");
   const h4 = document.createElement("h4");
-  const buyButton = document.createElement("button");
+  const rev = document.createElement("h5");
   const trailerButton = document.createElement("button");
 
   tile.classList.add("tile");
@@ -21,14 +19,8 @@ const createMovieTile = (id, poster, title, date, description) => {
   h1.innerText = title;
   h3.innerText = date;
   h4.innerText = description;
-  buyButton.innerText = "Buy";
+  rev.innerHTML = `Revenue: ${revenue}`;
   trailerButton.innerText = "Trailer";
-
-  buyButton.addEventListener("click", () => {
-    cartContents.add(id);
-    const cart = document.getElementById("cart");
-    cart.innerHTML = `Your cart contains ${cartContents.size} movies`;
-  });
 
   trailerButton.addEventListener("click", async () => {
     const trailersData = await getTMDBData(
@@ -47,18 +39,18 @@ const createMovieTile = (id, poster, title, date, description) => {
   details.append(h1);
   details.append(h3);
   details.append(h4);
+  details.append(rev);
 
   tile.append(img);
   tile.append(details);
-  tile.append(buyButton);
   tile.append(trailerButton);
 
   return tile;
 };
 
 function clearDiv(id) {
-  let isEmpty = document.getElementById(id).innerHTML === "";
-  if (isEmpty) {
+  let checkEmpty = document.getElementById(id).innerHTML === "";
+  if (checkEmpty) {
     return;
   } else {
     document.getElementById(id).innerHTML = "";
@@ -74,7 +66,8 @@ async function getData(id) {
     movie.poster_path,
     movie.title,
     movie.release_date,
-    movie.overview
+    movie.overview,
+    movie.revenue
   );
   movies.appendChild(tile);
 }

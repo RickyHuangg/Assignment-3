@@ -6,24 +6,25 @@
   background-color: rgb(231, 221, 221);
 }
 
+.name {
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  color: rgb(247, 6, 6);
+  font-weight: bold;
+}
+
 .topBar {
   position: relative;
   text-align: center;
 }
 
-header {
-  padding: 1rem;
-}
-
-header h1 {
-  text-align: center;
-}
-
 #movies {
-  display: grid;
+  display: block;
+  width: 50vw;
   padding: 1rem;
   gap: 1rem;
-  grid-template-columns: repeat(2, 1fr);
+  margin: auto;
 }
 
 .tile {
@@ -34,6 +35,7 @@ header h1 {
   border-style: solid;
   border-radius: 1rem;
   border-color: crimson;
+  justify-self: center;
 }
 
 img {
