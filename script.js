@@ -1,5 +1,7 @@
 import { TMDB_API_KEY } from "./key.js";
 
+const movies = document.getElementById("movies");
+
 const getTMDBData = async (url) => {
   return (await axios.get(url)).data;
 };
@@ -104,5 +106,3 @@ document.getElementById("get1").addEventListener("click", (e) => {
   let movieId = document.getElementById("options").value;
   getData(movieId);
 });
-
-const movies = document.getElementById("movies");
