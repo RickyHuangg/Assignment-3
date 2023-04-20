@@ -40,7 +40,6 @@
 
 img {
   max-width: 15em;
-  /* width: 250px; */
 }
 
 button {
@@ -49,4 +48,14 @@ button {
   color: rgb(0, 0, 0);
   padding: 0.5rem;
   align-self: end;
+}
+
+body {
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.backdrop {
+  opacity: 0.2;
 }

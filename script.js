@@ -16,7 +16,8 @@ const createMovieTile = (
   popular,
   runtime,
   tagline,
-  voterating
+  voterating,
+  backdrop
 ) => {
   const tile = document.createElement("div");
   const details = document.createElement("div");
@@ -30,6 +31,7 @@ const createMovieTile = (
   const tag = document.createElement("h5");
   const vote = document.createElement("h5");
   const trailerButton = document.createElement("button");
+  document.body.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500${backdrop})`;
 
   tile.classList.add("tile");
   img.src = `https://image.tmdb.org/t/p/original/${poster}`;
@@ -86,6 +88,12 @@ async function getData(id) {
   let movie = await getTMDBData(
     `https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}&language=en-US&adult=false`
   );
+
+  let backdropPath = await getTMDBData(
+    `https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}&language=en-US&adult=false`
+  );
+  console.log(backdropPath.backdrop_path);
+  console.log(backdropPath);
   const tile = createMovieTile(
     movie.id,
     movie.poster_path,
@@ -96,7 +104,8 @@ async function getData(id) {
     movie.popularity,
     movie.runtime,
     movie.tagline,
-    movie.vote_average
+    movie.vote_average,
+    movie.backdrop_path
   );
   movies.appendChild(tile);
 }
@@ -104,5 +113,6 @@ async function getData(id) {
 document.getElementById("get1").addEventListener("click", (e) => {
   clearDiv("movies");
   let movieId = document.getElementById("options").value;
+
   getData(movieId);
 });
